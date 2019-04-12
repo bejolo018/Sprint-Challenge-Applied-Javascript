@@ -11,18 +11,18 @@ class TabLink {
     // Check to see if this.tabData is equal to 'all'
     if(this.tabData === 'all'){
       // If `all` is true, select all cards regardless of their data attribute values
-       this.cards = document.querySelectorAll('card') ;
+       this.cards = document.querySelectorAll('.cards-container .card') ;
     } else {
       // else if `all` is false, only select the cards with matching this.tabData values
-       this.cards = document.querySelector(this.tabData) ;
+       this.cards = document.querySelector(`.cards-container .card[data-tab='${this.tabData}']`) ;
     }
 
 
      // Map over the newly converted NodeList we just created in our if statement above. Convert each this.cards element into a new instance of the TabCard class. 
      // Pass in a card object to the TabCard class. 
       
-      this.cards = Array.from(this.cards).map(card => {
-        this.TabCard
+      this.cards = Array.from(this.cards).map(card =>{
+        return new TabCard(card)
       });
 
     // Add a click event that invokes this.selectTab
@@ -34,7 +34,7 @@ class TabLink {
   selectTab(){
 
     // Select all elements with the .tab class on them
-    const tabs = document.querySelectorAll('.tab');
+    const tabs = document.querySelectorAll('.tabs .tab');
     
     // Iterate through the NodeList removing the .active-tab class from each element
     tabs.forEach(tab => {
@@ -42,7 +42,7 @@ class TabLink {
     })
 
     // Select all of the elements with the .card class on them
-    const cards = document.querySelectorAll('.card');
+    const cards = document.querySelectorAll('.cards-container .card');
 
     // Iterate through the NodeList setting the display style each one to 'none'
     cards.forEach(card => {
@@ -64,7 +64,7 @@ class TabCard {
   }
   selectCard(){
     // Update the style of this.cardElement to display = "flex"
-    this.cardElement.style.display('flex');
+    this.cardElement.style.display = 'flex';
   }
 
 }
@@ -78,4 +78,4 @@ class TabCard {
 - In your .forEach() method's callback function, return a new instance of TabLink and pass in each tab as a parameter
 
 */
-let tabs = document.querySelectorAll('.tab').forEach(tab => new TabLink(tab));
+let tabs = document.querySelectorAll('.tabs .topics div').forEach(tab => {new TabLink(tab)});
