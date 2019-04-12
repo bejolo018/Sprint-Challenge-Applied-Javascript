@@ -48,7 +48,6 @@ We would convert a nodelist to an array so that we can manipulate the elements w
 
 5. What is a component?
 
-
 A component is basically a block of resuable code.
 
 ### Git Set up
